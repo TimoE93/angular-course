@@ -1,0 +1,9 @@
+<h1>Directives</h1>
+<div [ngStyle]="{'background-color': 'red'}"></div>
+<hr>
+<h2>Custom Attribute Directive</h2>
+<p appHighlight [defaultColor]="'red'">Ich bin hervorgehoben</p>
+
+<h1>Structured Directives</h1>
+<div *ngIf="switch">Ich bin da wenn switch = true</div>
+<div *appUnless="switch">Ich bin da wenn switch = false</div>
