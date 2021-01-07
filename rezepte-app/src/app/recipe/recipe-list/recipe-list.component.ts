@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Ingredient } from 'src/app/shopping-list/ingredient.model';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -8,21 +8,11 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe('Rezept1', 'Beschreibung erstes Rezept', 'https://www.gernekochen.de/wp-content/uploads/2018/09/rigatoni-auflauf-rezept-gernekochen-hauptgericht.jpg', [new Ingredient('Zutat1', 10), new Ingredient('Zutat2', 10)]),
-    new Recipe('Rezept2', 'Beschreibung zweites Rezept', 'https://www.gernekochen.de/wp-content/uploads/2018/09/rigatoni-auflauf-rezept-gernekochen-hauptgericht.jpg', [new Ingredient('Zutat1', 10), new Ingredient('Zutat2', 10)]),
-    new Recipe('Rezept3', 'Beschreibung drittes Rezept', 'https://www.gernekochen.de/wp-content/uploads/2018/09/rigatoni-auflauf-rezept-gernekochen-hauptgericht.jpg', [new Ingredient('Zutat1', 10), new Ingredient('Zutat2', 10)])
-  ]
+  recipes: Recipe[];
   
-  
-    @Output() recipeSelected = new EventEmitter<Recipe>();
-  constructor() { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
   }
-
-  onSelected(recipe:Recipe) {
-    this.recipeSelected.emit(recipe);
-  }
-
 }
